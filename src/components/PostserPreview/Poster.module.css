@@ -1,0 +1,12 @@
+.Poster {
+
+}
+
+.Poster img {
+    width: 450px;
+}
+
+.ErrorPoster {
+    height: 675px;
+    background-color: indianred;
+}

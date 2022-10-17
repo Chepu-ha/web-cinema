@@ -1,0 +1,6 @@
+.Numbers {
+    display: flex;flex-wrap: wrap;
+}
+.Numbers > * {
+
+}
