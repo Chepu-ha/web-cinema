@@ -1,14 +1,11 @@
 export function MovieInfo({movie}) {
+	const {title, overview, release_date: date} = movie;
 
 	return (
 		<div>
-			<div>{movie.title}</div>
-			<div>
-				{movie.release_date.split("-", 1)}
-			</div>
-			<div>
-				{movie.overview}
-			</div>
+			{title && <div>{title}</div>}
+			{date && <div>{date.split("-", 1)}</div>}
+			{overview && <div>{overview}</div>}
 		</div>
 	);
 }
