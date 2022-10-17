@@ -7,10 +7,10 @@ import {movieActions} from "../../redux";
 import CardsStyle from "./MovieList.module.css";
 
 export function MoviesList() {
-	const dispatch = useDispatch();
-	const {movies, loading, error} = useSelector(state => state.movieReducer);
-
 	const [query, setQuery]= useSearchParams({page:"1"})
+	const {movies, loading, error} = useSelector(state => state.movieReducer);
+	const dispatch = useDispatch();
+
 	useEffect(() => {
 		dispatch(movieActions.getAll(query.get("page")));
 	}, [dispatch, query]);

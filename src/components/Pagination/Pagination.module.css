@@ -1,6 +1,9 @@
-.Numbers {
-    display: flex;flex-wrap: wrap;
+.Pagination {
+    display: flex;
+    justify-content: center;
 }
-.Numbers > * {
 
+.Active {
+    background-color: red;
+    color: #fff;
 }
