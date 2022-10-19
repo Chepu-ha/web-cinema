@@ -3,9 +3,9 @@ export function MovieInfo({movie}) {
 
 	return (
 		<div>
-			{title && <div>{title}</div>}
-			{date && <div>{date.split("-", 1)}</div>}
-			{overview && <div>{overview}</div>}
+			{title ? <div>{title}</div> : <div></div>}
+			{date ? <div>{date.split("-", 1)}</div> : <div></div>}
+			{overview ? <div>{overview}</div> : <div></div>}
 		</div>
 	);
 }

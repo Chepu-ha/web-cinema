@@ -8,3 +8,10 @@
     cursor: pointer;
     background-color: darkcyan;
 }
+
+.FilterActive {
+    flex: 1 1 200px;
+    border: 1px solid blueviolet;
+    text-align: center;
+    background-color: red;
+}

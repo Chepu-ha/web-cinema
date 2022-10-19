@@ -4,6 +4,8 @@ import {movieService} from "../../services";
 
 const initialState = {
 	movies: [],
+	currentGenre: {},
+	filterMovies: [],
 	posters: [],
 	loading: false,
 	error: null
@@ -21,10 +23,26 @@ const getAll = createAsyncThunk(
 	}
 );
 
+const filterByGenre = createAsyncThunk(
+	"movieSlice/filterByGenre",
+	async ({page, currentGenreId}, {rejectedWithValue}) => {
+		try {
+			const {data} = await movieService.getByGenre(page, currentGenreId);
+			return data.results;
+		} catch (e) {
+			return rejectedWithValue(e.response.data);
+		}
+	}
+);
+
 const movieSlice = createSlice({
 	name: "movieSlice",
 	initialState,
-	reducers: {},
+	reducers: {
+		setCurrentGenreId: (state, action) => {
+			state.currentGenre = action.payload;
+		}
+	},
 	extraReducers: builder =>
 		builder
 		.addCase(getAll.fulfilled, (state, action) => {
@@ -38,13 +56,17 @@ const movieSlice = createSlice({
 		.addCase(getAll.pending, (state, action) => {
 			state.loading = true;
 		})
+		.addCase(filterByGenre.fulfilled, (state, action) => {
+			state.filterMovies = action.payload;
+		})
 });
 
-// eslint-disable-next-line no-empty-pattern
-const {reducer: movieReducer, actions} = movieSlice;
+const {reducer: movieReducer, actions: {setCurrentGenreId}} = movieSlice;
 
 const movieActions = {
-	getAll
+	getAll,
+	setCurrentGenreId,
+	filterByGenre
 };
 
 export {movieReducer, movieActions};

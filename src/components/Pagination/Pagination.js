@@ -1,10 +1,12 @@
 import {useSearchParams} from "react-router-dom";
 import {useEffect, useState} from "react";
+import {useSelector} from "react-redux";
 
 import paginationStyle from "./Pagination.module.css";
 
 export function Pagination() {
 	const [query, setQuery] = useSearchParams({page: "1"});
+	const {currentGenre} = useSelector(state => state.movieReducer);
 
 	const [currentPage, setCurrentPage] = useState(query.get("page"));
 	const [allPages, setAllPages] = useState([]);
@@ -26,23 +28,35 @@ export function Pagination() {
 	useEffect(() => {
 		//API can give only 500 pages
 		for (let i = 1; i <= 500; i++) {
-			allPages.push(i);
+			setAllPages((allPages) => [...allPages, i]);
 		}
-	}, [allPages]);
+	}, []);
 
 	const prevPage = () => {
-		setQuery(value => ({page: value.get("page") - 1}));
+		if (currentGenre.name) {
+			setQuery(value => ({page: value.get("page") - 1, with_genres: currentGenre.name}));
+		} else {
+			setQuery(value => ({page: value.get("page") - 1}));
+		}
 	};
 	const nextPage = () => {
-		setQuery(value => ({page: +value.get("page") + 1}));
+		if (currentGenre.name) {
+			setQuery(value => ({page: +value.get("page") + 1, with_genres: currentGenre.name}));
+		} else {
+			setQuery(value => ({page: +value.get("page") + 1}));
+		}
 	};
 	const selectPage = (page) => {
-		setQuery({page});
+		if (currentGenre.name) {
+			setQuery({page, with_genres: currentGenre.name});
+		} else {
+			setQuery({page});
+		}
 	};
 
 	return (
 		<div className={paginationStyle.Pagination}>
-			<button disabled={currentPage === 1} onClick={() => prevPage()}>Prev</button>
+			<button disabled={+currentPage === 1} onClick={() => prevPage()}>Prev</button>
 			<button hidden={floorCurrentPage === 0} onClick={() => selectPage(1)}>1...</button>
 
 			{allPages.map((page, index) => page > floorCurrentPage && page <= ceilCurrentPage &&
@@ -57,7 +71,7 @@ export function Pagination() {
 			)}
 
 			<button hidden={floorCurrentPage === 490} onClick={() => selectPage(500)}>...500</button>
-			<button disabled={currentPage === allPages.length} onClick={() => nextPage()}>Next</button>
+			<button disabled={+currentPage === allPages.length} onClick={() => nextPage()}>Next</button>
 		</div>
 	);
 }

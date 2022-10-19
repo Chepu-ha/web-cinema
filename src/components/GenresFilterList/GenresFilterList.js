@@ -15,8 +15,8 @@ export function GenresFilterList() {
 
 	return (
 		<div className={GenresStyle.Filters}>
-			{loading&&<h1>Loading...</h1>}
-			{error&&<h1>Error</h1>}
+			{loading && <h1>Loading...</h1>}
+			{error && <h1>Error</h1>}
 			{genres.map((genre) => <GenreFilter key={genre.id} genre={genre}/>)}
 		</div>
 	);

@@ -4,8 +4,8 @@ export function MoviesListPage() {
 	return (
 		<div>
 			<GenresFilterList/>
-			<MoviesList/>
 			<Pagination/>
+			<MoviesList/>
 		</div>
 	);
 }

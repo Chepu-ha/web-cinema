@@ -4,22 +4,30 @@ import {useSearchParams} from "react-router-dom";
 
 import {MoviesListCard} from "../MoviesListCard/MoviesListCard";
 import {movieActions} from "../../redux";
+
 import CardsStyle from "./MovieList.module.css";
 
 export function MoviesList() {
-	const [query, setQuery]= useSearchParams({page:"1"})
-	const {movies, loading, error} = useSelector(state => state.movieReducer);
+	const {currentGenre, filterMovies, movies, loading, error} = useSelector(state => state.movieReducer);
+	const [query, setQuery] = useSearchParams({page: "1"});
 	const dispatch = useDispatch();
 
 	useEffect(() => {
-		dispatch(movieActions.getAll(query.get("page")));
-	}, [dispatch, query]);
+		if (currentGenre) {
+			dispatch(movieActions.filterByGenre({page: query.get("page"), currentGenreId: currentGenre.id}));
+		} else {
+			dispatch(movieActions.getAll(query.get("page")));
+		}
+	}, [currentGenre, dispatch, query]);
 
 	return (
 		<div className={CardsStyle.Cards}>
 			{loading && <h1>Loading...</h1>}
 			{error && <h1>Error</h1>}
-			{movies.map((movie) => <MoviesListCard key={movie.id} movie={movie}/>)}
+			{
+				currentGenre ? filterMovies.map((movie) => <MoviesListCard key={movie.id} movie={movie}/>) :
+					movies.map((movie) => <MoviesListCard key={movie.id} movie={movie}/>)
+			}
 		</div>
 	);
 }
