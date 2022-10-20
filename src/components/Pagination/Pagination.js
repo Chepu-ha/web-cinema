@@ -1,6 +1,8 @@
 import {useSearchParams} from "react-router-dom";
 import {useEffect, useState} from "react";
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
+
+import {movieActions} from "../../redux";
 
 import paginationStyle from "./Pagination.module.css";
 
@@ -13,6 +15,8 @@ export function Pagination() {
 
 	const [floorCurrentPage, setFloorCurrentPage] = useState(0);
 	const [ceilCurrentPage, setCeilCurrentPage] = useState(10);
+
+	const dispatch = useDispatch();
 
 	useEffect(() => {
 		setCurrentPage(Number(query.get("page")));
@@ -35,29 +39,41 @@ export function Pagination() {
 	const prevPage = () => {
 		if (currentGenre.name) {
 			setQuery(value => ({page: value.get("page") - 1, with_genres: currentGenre.name}));
+			dispatch(movieActions.filterByGenre({page: query.get("page") - 1, currentGenreId: currentGenre.id}));
+			console.log(`movie?page=${query.get("page")}&with_genres=${currentGenre.name}`, "prevPageGenre");
 		} else {
 			setQuery(value => ({page: value.get("page") - 1}));
+			dispatch(movieActions.getAll(query.get("page") - 1));
+			console.log(`movie?page=${query.get("page") - 1}`, "prevPage");
 		}
 	};
 	const nextPage = () => {
-		if (currentGenre.name) {
+		if (currentGenre.id) {
 			setQuery(value => ({page: +value.get("page") + 1, with_genres: currentGenre.name}));
+			dispatch(movieActions.filterByGenre({page: +query.get("page") + 1, currentGenreId: currentGenre.id}));
+			console.log(`movie?page=${+query.get("page") + 1}&with_genres=${currentGenre.name}`, "nextPageGenre");
 		} else {
 			setQuery(value => ({page: +value.get("page") + 1}));
+			dispatch(movieActions.getAll(query.get("page") + 1));
+			console.log(`movie?page=${+query.get("page") + 1}`, "nextPage");
 		}
 	};
 	const selectPage = (page) => {
-		if (currentGenre.name) {
+		if (currentGenre.id) {
 			setQuery({page, with_genres: currentGenre.name});
+			dispatch(movieActions.filterByGenre({page, currentGenreId: currentGenre.id}));
+			console.log(`movie?page=${query.get("page")}&with_genres=${currentGenre.name}`, "selectPageGenre");
 		} else {
 			setQuery({page});
+			dispatch(movieActions.getAll(page));
+			console.log(`movie?page=${page}`, "selectPage");
 		}
 	};
 
 	return (
 		<div className={paginationStyle.Pagination}>
 			<button disabled={+currentPage === 1} onClick={() => prevPage()}>Prev</button>
-			<button hidden={floorCurrentPage === 0} onClick={() => selectPage(1)}>1...</button>
+			<button hidden={floorCurrentPage === 0} onClick={() => selectPage(allPages[0])}>1...</button>
 
 			{allPages.map((page, index) => page > floorCurrentPage && page <= ceilCurrentPage &&
 				<button
@@ -70,7 +86,7 @@ export function Pagination() {
 				</button>
 			)}
 
-			<button hidden={floorCurrentPage === 490} onClick={() => selectPage(500)}>...500</button>
+			<button hidden={floorCurrentPage === 490} onClick={() => selectPage(allPages.length)}>...500</button>
 			<button disabled={+currentPage === allPages.length} onClick={() => nextPage()}>Next</button>
 		</div>
 	);

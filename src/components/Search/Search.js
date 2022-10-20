@@ -4,14 +4,14 @@ import {useEffect, useState} from "react";
 import {movieActions} from "../../redux";
 
 export function Search() {
-	const {currentQuery, currentGenre} = useSelector(state => state.movieReducer);
+	const {currentQuery} = useSelector(state => state.movieReducer);
 	const [query, setQuery] = useSearchParams({query: currentQuery});
-	const dispatch = useDispatch();
 	const [title, setTitle] = useState("");
+
+	const dispatch = useDispatch();
 
 	useEffect(() => {
 		setQuery({query: currentQuery});
-		// dispatch(movieActions.searchMovie(currentQuery));
 	}, [currentQuery]);
 
 	const change = (e) => {
@@ -19,8 +19,9 @@ export function Search() {
 	};
 
 	const search = () => {
-		dispatch(movieActions.setCurrentQuery(title.toLowerCase()));
-		setQuery(query => ({query: currentQuery}));
+		setQuery(query => ({query: title}));
+		dispatch(movieActions.searchMovie(title.toLowerCase()));
+		console.log(`movie?query=${title}`, "Search");
 	};
 
 	return (

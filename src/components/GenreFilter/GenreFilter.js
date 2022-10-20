@@ -16,8 +16,10 @@ export function GenreFilter({genre}) {
 	}, []);
 
 	const genreFilter = () => {
-		dispatch(movieActions.setCurrentGenre({name, id}));
 		setQuery(query => ({page: query.get("page"), with_genres: name}));
+		dispatch(movieActions.filterByGenre({page: query.get("page"), currentGenreId: id}));
+		dispatch(movieActions.setCurrentGenre(genre))
+		console.log(`movie?page=${query.get("page")}&with_genres=${id}`, "GenreFilter");
 	};
 
 	return (
