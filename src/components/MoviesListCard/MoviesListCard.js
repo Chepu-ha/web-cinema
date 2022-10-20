@@ -10,7 +10,7 @@ export function MoviesListCard({movie}) {
 			<GenreBadge movie={movie}/>
 			<PosterPreview movie={movie}/>
 			<MovieInfo movie={movie}/>
-			<StarsRating/>
+			<StarsRating rating={movie.vote_average}/>
 		</div>
 	);
 }

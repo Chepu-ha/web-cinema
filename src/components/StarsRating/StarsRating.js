@@ -1,7 +1,19 @@
-export function StarsRating() {
-    return (
-        <div>
-           <h4>StarsRatingComponent</h4>
-        </div>
-    );
+import {Rating} from "react-simple-star-rating";
+
+import StarsStyle from "./StarsStyle.module.css";
+
+export function StarsRating({rating}) {
+
+	return (
+		<div className={StarsStyle.Stars}>
+			<Rating
+				initialValue={rating}
+				iconsCount={10}
+				readonly={true}
+				allowFraction={true}
+				fillColor={"#f1a545"}
+				size={35}
+			/>
+		</div>
+	);
 }
