@@ -5,7 +5,8 @@ import {movieService} from "../../services";
 const initialState = {
 	movies: [],
 	currentGenre: {},
-	filterMovies: [],
+	currentQuery: "",
+	// filterMovies: [],
 	posters: [],
 	loading: false,
 	error: null
@@ -35,13 +36,29 @@ const filterByGenre = createAsyncThunk(
 	}
 );
 
+const searchMovie = createAsyncThunk(
+	"movieSlice/searchMovie",
+	async (query, {rejectedWithValue}) => {
+		try {
+			const {data} = await movieService.search(String(query));
+			return data.results;
+		} catch (e) {
+			return rejectedWithValue(e.response.data);
+		}
+	}
+);
+
 const movieSlice = createSlice({
 	name: "movieSlice",
 	initialState,
 	reducers: {
-		setCurrentGenreId: (state, action) => {
+		setCurrentGenre: (state, action) => {
 			state.currentGenre = action.payload;
+		},
+		setCurrentQuery: (state, action) => {
+			state.currentQuery = action.payload;
 		}
+
 	},
 	extraReducers: builder =>
 		builder
@@ -57,16 +74,21 @@ const movieSlice = createSlice({
 			state.loading = true;
 		})
 		.addCase(filterByGenre.fulfilled, (state, action) => {
-			state.filterMovies = action.payload;
+			state.movies = action.payload;
+		})
+		.addCase(searchMovie.fulfilled, (state, action) => {
+			state.movies = action.payload;
 		})
 });
 
-const {reducer: movieReducer, actions: {setCurrentGenreId}} = movieSlice;
+const {reducer: movieReducer, actions: {setCurrentGenre, setCurrentQuery}} = movieSlice;
 
 const movieActions = {
 	getAll,
-	setCurrentGenreId,
-	filterByGenre
+	filterByGenre,
+	searchMovie,
+	setCurrentGenre,
+	setCurrentQuery
 };
 
 export {movieReducer, movieActions};

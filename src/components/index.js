@@ -10,3 +10,4 @@ export * from "./GenresFilterList/GenresFilterList";
 export * from "./GenreFilter/GenreFilter";
 export * from "./Pagination/Pagination";
 export * from "./ToggleTheme/ToggleTheme";
+export * from "./Search/Search";

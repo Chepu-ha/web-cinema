@@ -5,7 +5,8 @@ const accessToken = "eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI5ZjkxNjJjN2FlYmM1ZTFhYWE3MT
 const urls = {
 	movies: "/discover/movie",
 	genres: "/genre/movie/list",
-	posters: "/t/p/w500"
+	posters: "/t/p/w500",
+	search: "/search/movie"
 };
 
 export {baseURL, postersURL, accessToken, urls};
