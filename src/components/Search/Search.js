@@ -1,26 +1,26 @@
 import {useDispatch, useSelector} from "react-redux";
 import {useSearchParams} from "react-router-dom";
-import {useEffect, useState} from "react";
+import {useState} from "react";
+
 import {movieActions} from "../../redux";
 
 export function Search() {
 	const {currentQuery} = useSelector(state => state.movieReducer);
-	const [query, setQuery] = useSearchParams({query: currentQuery});
+	const [query, setQuery] = useSearchParams({page: "1", query: currentQuery});
 	const [title, setTitle] = useState("");
 
 	const dispatch = useDispatch();
-
-	useEffect(() => {
-		setQuery({query: currentQuery});
-	}, [currentQuery]);
 
 	const change = (e) => {
 		setTitle(e.target.value);
 	};
 
 	const search = () => {
-		setQuery(query => ({query: title}));
-		dispatch(movieActions.searchMovie(title.toLowerCase()));
+		setQuery({page: query.get("page"), query: title});
+		dispatch(movieActions.setCurrentQuery(title));
+		dispatch(movieActions.setCurrentGenre({}));
+		dispatch(movieActions.searchMovie({page: query.get("page"), query: title}));
+
 		console.log(`movie?query=${title}`, "Search");
 	};
 
