@@ -12,10 +12,14 @@ export function MoviesList() {
 	const [query, setQuery] = useSearchParams({page: "1"});
 	const dispatch = useDispatch();
 
+	const {currentQuery} = useSelector(state => state.movieReducer);
+
 	useEffect(() => {
-		setQuery({page: query.get("page")});
-		dispatch(movieActions.getAll(query.get("page")));
-		dispatch(movieActions.setCurrentMovie({}))
+			console.log(currentQuery);
+			setQuery({page: query.get("page")});
+			dispatch(movieActions.getAll(query.get("page")));
+			dispatch(movieActions.setCurrentMovie({}));
+
 
 		console.log(`movie?page=${query.get("page")}`, "MovieList1");
 	}, []);

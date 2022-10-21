@@ -6,8 +6,8 @@ export function MoviesListPage() {
 		<div>
 			<Outlet/>
 			<GenresFilterList/>
-			<Pagination/>
 			<MoviesList/>
+			<Pagination/>
 		</div>
 	);
 }
