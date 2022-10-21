@@ -13,8 +13,10 @@ export function MoviesList() {
 	const dispatch = useDispatch();
 
 	useEffect(() => {
-		console.log(`movie?page=${query.get("page")}`, "MovieList1");
+		setQuery({page: query.get("page")});
 		dispatch(movieActions.getAll(query.get("page")));
+
+		console.log(`movie?page=${query.get("page")}`, "MovieList1");
 	}, []);
 
 	return (
