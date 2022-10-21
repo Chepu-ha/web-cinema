@@ -1,6 +1,6 @@
+import {useSearchParams} from "react-router-dom";
 import {useEffect, useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
-import {useSearchParams} from "react-router-dom";
 
 import {movieActions} from "../../redux";
 
@@ -27,11 +27,9 @@ export function Pagination() {
 		} else {
 			setFloorCurrentPage(Math.floor(currentPage / 10) * 10);
 		}
-	}, [query, currentPage]);
+	}, [currentPage, query]);
 
 	useEffect(() => {
-		// setQuery({page: query.get("page")});
-
 		//API can give only 500 pages
 		for (let i = 1; i <= 500; i++) {
 			setAllPages((allPages) => [...allPages, i]);
@@ -45,7 +43,7 @@ export function Pagination() {
 
 			console.log(`movie?page=${query.get("page")}&with_genres=${currentGenre.name}`, "prevPageGenre");
 		} else if (currentQuery) {
-			setQuery(value =>({page: value.get("page") - 1, query: currentQuery}))
+			setQuery(value => ({page: value.get("page") - 1, query: currentQuery}));
 			dispatch(movieActions.searchMovie({page: query.get("page") - 1, query: currentQuery}));
 
 			console.log(`movie?page=${query.get("page") - 1}&query=${currentQuery}`, "prevPageQuery");
@@ -63,13 +61,13 @@ export function Pagination() {
 
 			console.log(`movie?page=${+query.get("page") + 1}&with_genres=${currentGenre.name}`, "nextPageGenre");
 		} else if (currentQuery) {
-			setQuery(value =>({page: +value.get("page") + 1, query: currentQuery}))
+			setQuery(value => ({page: +value.get("page") + 1, query: currentQuery}));
 			dispatch(movieActions.searchMovie({page: +query.get("page") + 1, query: currentQuery}));
 
 			console.log(`movie?page=${+query.get("page") + 1}&query=${currentQuery}`, "nextPageQuery");
 		} else {
 			setQuery(value => ({page: +value.get("page") + 1}));
-			dispatch(movieActions.getAll(+query.get("page") + 1));
+			dispatch(movieActions.getAll(query.get("page") + 1));
 
 			console.log(`movie?page=${+query.get("page") + 1}`, "nextPage");
 		}
@@ -81,10 +79,10 @@ export function Pagination() {
 
 			console.log(`movie?page=${query.get("page")}&with_genres=${currentGenre.name}`, "selectPageGenre");
 		} else if (currentQuery) {
-			setQuery(value =>({page: +value.get("page"), query: currentQuery}))
+			setQuery({page: selectedPage, query: currentQuery});
 			dispatch(movieActions.searchMovie({page: selectedPage, query: currentQuery}));
 
-			console.log(`movie?page=${+query.get("page") + 1}&query=${currentQuery}`, "selectPageQuery");
+			console.log(`movie?page=${selectedPage}&query=${currentQuery}`, "selectPageQuery");
 		} else {
 			setQuery({page: selectedPage});
 			dispatch(movieActions.getAll(selectedPage));
