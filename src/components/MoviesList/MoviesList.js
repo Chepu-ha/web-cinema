@@ -15,6 +15,7 @@ export function MoviesList() {
 	useEffect(() => {
 		setQuery({page: query.get("page")});
 		dispatch(movieActions.getAll(query.get("page")));
+		dispatch(movieActions.setCurrentMovie({}))
 
 		console.log(`movie?page=${query.get("page")}`, "MovieList1");
 	}, []);

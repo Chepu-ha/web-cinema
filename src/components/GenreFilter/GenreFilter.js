@@ -11,7 +11,7 @@ export function GenreFilter({genre}) {
 	const dispatch = useDispatch();
 
 	const genreFilter = () => {
-		setQuery(query => ({page: query.get("page"), with_genres: name}));
+		setQuery({page: "1", with_genres: name});
 		dispatch(movieActions.filterByGenre({page: query.get("page"), currentGenreId: id}));
 		dispatch(movieActions.setCurrentGenre(genre));
 
@@ -19,9 +19,9 @@ export function GenreFilter({genre}) {
 	};
 
 	return (
-		<div onClick={() => genreFilter()}
-			  className={currentGenre.name === name ? GenreStyle.FilterActive : GenreStyle.Filter}>
+		<button disabled={currentGenre.name === name} onClick={() => genreFilter()}
+			  className={currentGenre.name === name ? GenreStyle.FilterCurrent : GenreStyle.Filter}>
 			<div>{name}</div>
-		</div>
+		</button>
 	);
 }

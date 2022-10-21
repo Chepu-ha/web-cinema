@@ -9,9 +9,11 @@
     background-color: darkcyan;
 }
 
-.FilterActive {
+.FilterCurrent {
     flex: 1 1 200px;
     border: 1px solid blueviolet;
     text-align: center;
     background-color: red;
+    color: #ffffff;
+
 }

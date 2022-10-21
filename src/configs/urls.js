@@ -6,7 +6,8 @@ const urls = {
 	movies: "/discover/movie",
 	genres: "/genre/movie/list",
 	posters: "/t/p/w500",
-	search: "/search/movie"
+	search: "/search/movie",
+	movie: "/movie/"
 };
 
 export {baseURL, postersURL, accessToken, urls};

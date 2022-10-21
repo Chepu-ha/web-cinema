@@ -68,7 +68,7 @@ export function Pagination() {
 			console.log(`movie?page=${+query.get("page") + 1}&query=${currentQuery}`, "nextPageQuery");
 		} else {
 			setQuery(value => ({page: +value.get("page") + 1}));
-			dispatch(movieActions.getAll(query.get("page") + 1));
+			dispatch(movieActions.getAll(+query.get("page") + 1));
 
 			console.log(`movie?page=${+query.get("page") + 1}`, "nextPage");
 		}

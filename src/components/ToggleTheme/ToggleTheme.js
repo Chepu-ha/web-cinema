@@ -1,7 +1,14 @@
+import {ThemeContext} from "../../App";
+
 export function ToggleTheme() {
-    return (
-        <div>
-			  <h4>ToggleThemeComponent</h4>
-        </div>
-    );
+
+	return (
+		<div>
+			<ThemeContext.Consumer>
+				{(value) => (
+					<button onClick={() => value.toggleTheme()}>Change theme</button>
+				)}
+			</ThemeContext.Consumer>
+		</div>
+	);
 }
