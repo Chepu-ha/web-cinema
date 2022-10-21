@@ -54,6 +54,7 @@ export function Pagination() {
 			console.log(`movie?page=${query.get("page") - 1}`, "prevPage");
 		}
 	};
+
 	const nextPage = () => {
 		if (currentGenre.id) {
 			setQuery(value => ({page: +value.get("page") + 1, with_genres: currentGenre.name}));
@@ -72,6 +73,7 @@ export function Pagination() {
 			console.log(`movie?page=${+query.get("page") + 1}`, "nextPage");
 		}
 	};
+
 	const selectPage = (selectedPage) => {
 		if (currentGenre.id) {
 			setQuery({page: selectedPage, with_genres: currentGenre.name});
