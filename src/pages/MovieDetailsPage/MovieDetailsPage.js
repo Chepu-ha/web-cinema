@@ -1,4 +1,4 @@
-import {Link, useParams} from "react-router-dom";
+import {Link, useLocation, useParams} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
 import {useEffect} from "react";
 
@@ -6,15 +6,17 @@ import {movieActions} from "../../redux";
 import {postersURL} from "../../configs";
 
 export function MovieDetailsPage() {
-
 	const dispatch = useDispatch();
 	const {id} = useParams();
-	const {currentMovie, error} = useSelector(state => state.movieReducer);
+	const pathname = localStorage.getItem("pathname");
+
 
 	useEffect(() => {
 		dispatch(movieActions.getMovieById(id));
-		dispatch(movieActions.setCurrentGenre({}))
+		dispatch(movieActions.setCurrentGenre({}));
 	}, [dispatch, id]);
+
+	const {currentMovie, error} = useSelector(state => state.movieReducer);
 
 	const {
 		poster_path,
@@ -30,10 +32,11 @@ export function MovieDetailsPage() {
 		runtime,
 	} = currentMovie;
 
+
 	return (
 		<div>
-			<div><Link to={"/moviesList"}>List</Link></div>
-			{!error &&
+			<div><Link to={pathname}>List</Link></div>
+			{!error && title &&
 				<div>
 					<div className={"title"}>
 						<h1>{title}</h1>

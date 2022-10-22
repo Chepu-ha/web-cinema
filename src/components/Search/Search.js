@@ -1,10 +1,13 @@
 import {useDispatch, useSelector} from "react-redux";
-import {useNavigate, useParams, useSearchParams} from "react-router-dom";
+import {useNavigate, useSearchParams} from "react-router-dom";
 
 import {movieActions} from "../../redux";
 import {useForm} from "react-hook-form";
 
 export function Search() {
+	const navigate = useNavigate();
+
+
 	const {currentQuery} = useSelector(state => state.movieReducer);
 	const [query, setQuery] = useSearchParams({page: "1", query: currentQuery});
 
@@ -13,13 +16,15 @@ export function Search() {
 
 	const search = (data) => {
 		const {searchInput} = data;
-		setQuery({page: query.get("page"), query: searchInput});
-		dispatch(movieActions.setCurrentQuery(searchInput));
-		dispatch(movieActions.setCurrentGenre({}));
-		dispatch(movieActions.searchMovie({page: query.get("page"), query: searchInput}));
-		reset();
+		navigate(`1/searchMode/${searchInput}`)
 
-		console.log(`movie?query=${searchInput}`, "Search");
+		dispatch(movieActions.setCurrentQuery(searchInput));
+		// setQuery({page: query.get("page"), query: searchInput});
+		// dispatch(movieActions.setCurrentGenre({}));
+		// dispatch(movieActions.searchMovie({page: query.get("page"), query: searchInput}));
+		// reset();
+		//
+		// console.log(`movie?query=${searchInput}`, "Search");
 	};
 
 	return (

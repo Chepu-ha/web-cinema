@@ -16,7 +16,7 @@ const getAll = createAsyncThunk(
 	"movieSlice/getAll",
 	async (page, {rejectedWithValue}) => {
 		try {
-			const {data} = await movieService.getAll(String(page));
+			const {data} = await movieService.getAll(page.toString());
 			return data.results;
 		} catch (e) {
 			return rejectedWithValue(e.response.data);
@@ -52,7 +52,7 @@ const getMovieById = createAsyncThunk(
 	"movieSlice/getMovieById",
 	async (id, {rejectedWithValue}) => {
 		try {
-			const {data} = await movieService.getById(String(id));
+			const {data} = await movieService.getById(id.toString());
 			return data;
 		} catch (e) {
 			return rejectedWithValue(e.response.data);

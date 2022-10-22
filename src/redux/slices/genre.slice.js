@@ -13,6 +13,7 @@ const getAll = createAsyncThunk(
 	async (_, {rejectedWithValue}) => {
 		try {
 			const {data} = await genreService.getAll();
+			console.log(data);
 			return data.genres;
 		} catch (e) {
 			return rejectedWithValue(e.response.data);
