@@ -1,12 +1,10 @@
-import {useDispatch, useSelector} from "react-redux";
-import {useNavigate, useParams, useSearchParams} from "react-router-dom";
+import {useNavigate, useParams} from "react-router-dom";
+import {useEffect, useState} from "react";
 
 import GenreStyle from "./GenreFilter.module.css";
-import {useEffect, useState} from "react";
 
 export function GenreFilter({genre}) {
 	const {id: genreId, name} = genre;
-
 	const {genre: paramsGenre} = useParams();
 	const navigate = useNavigate();
 	const [isActive, setIsActive] = useState(false);

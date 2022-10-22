@@ -1,5 +1,6 @@
-import {postersURL} from "../../configs";
 import {useSelector} from "react-redux";
+
+import {postersURL} from "../../configs";
 
 import PosterStyle from "./Poster.module.css";
 

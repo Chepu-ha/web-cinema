@@ -1,8 +1,5 @@
-import {useLocation, useNavigate, useParams, useSearchParams} from "react-router-dom";
+import {useNavigate, useParams} from "react-router-dom";
 import {useEffect, useState} from "react";
-import {useDispatch, useSelector} from "react-redux";
-
-import {movieActions} from "../../redux";
 
 import paginationStyle from "./Pagination.module.css";
 
@@ -10,20 +7,12 @@ export function Pagination() {
 	const params = useParams();
 	const {page, genre, search} = params;
 	const navigate = useNavigate();
-	const dispatch = useDispatch();
-
-	// const location = useLocation();
-	// const {pathname} = location;
-
-	const [query, setQuery] = useSearchParams({page: "1"});
-	const {currentGenre, currentQuery} = useSelector(state => state.movieReducer);
 
 	const [currentPage, setCurrentPage] = useState(page);
 	const [allPages, setAllPages] = useState([]);
 
 	const [floorCurrentPage, setFloorCurrentPage] = useState(0);
 	const [ceilCurrentPage, setCeilCurrentPage] = useState(10);
-
 
 	useEffect(() => {
 		setCurrentPage(+page);
@@ -72,23 +61,6 @@ export function Pagination() {
 		} else {
 			navigate(`/moviesListPage/${selectedPage}`);
 		}
-
-		// if (currentGenre.id) {
-		// 	setQuery({page: selectedPage, with_genres: currentGenre.name});
-		// 	dispatch(movieActions.filterByGenre({page: selectedPage, currentGenreId: currentGenre.id}));
-		//
-		// 	console.log(`movie?page=${query.get("page")}&with_genres=${currentGenre.name}`, "selectPageGenre");
-		// } else if (currentQuery) {
-		// 	setQuery({page: selectedPage, query: currentQuery});
-		// 	dispatch(movieActions.searchMovie({page: selectedPage, query: currentQuery}));
-		//
-		// 	console.log(`movie?page=${selectedPage}&query=${currentQuery}`, "selectPageQuery");
-		// } else {
-		// 	setQuery({page: selectedPage});
-		// 	dispatch(movieActions.getAll(selectedPage));
-		//
-		// 	console.log(`movie?page=${selectedPage}`, "selectPage");
-		// }
 	};
 
 	return (

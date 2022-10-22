@@ -12,7 +12,6 @@ export function MovieDetailsPage() {
 
 	useEffect(() => {
 		dispatch(movieActions.getMovieById(id));
-		dispatch(movieActions.setCurrentGenre({}));
 	}, [dispatch, id]);
 
 	const {currentMovie, error} = useSelector(state => state.movieReducer);

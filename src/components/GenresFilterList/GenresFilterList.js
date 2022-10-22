@@ -3,6 +3,7 @@ import {useEffect} from "react";
 
 import {genreActions} from "../../redux";
 import {GenreFilter} from "../GenreFilter/GenreFilter";
+
 import GenresStyle from "./GenresFilter.module.css";
 
 export function GenresFilterList() {

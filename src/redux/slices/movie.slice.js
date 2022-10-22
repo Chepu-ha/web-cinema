@@ -5,8 +5,6 @@ import {movieService} from "../../services";
 const initialState = {
 	movies: [],
 	currentMovie: {},
-	currentQuery: "",
-	currentGenre: {},
 	posters: [],
 	loading: false,
 	error: null
@@ -64,9 +62,6 @@ const movieSlice = createSlice({
 	name: "movieSlice",
 	initialState,
 	reducers: {
-		setCurrentGenre: (state, action) => {
-			state.currentGenre = action.payload;
-		},
 		setCurrentQuery: (state, action) => {
 			state.currentQuery = action.payload;
 		},
@@ -90,7 +85,6 @@ const movieSlice = createSlice({
 		})
 		.addCase(filterByGenre.fulfilled, (state, action) => {
 			state.movies = action.payload;
-
 		})
 		.addCase(searchMovie.fulfilled, (state, action) => {
 			state.movies = action.payload;
@@ -103,15 +97,13 @@ const movieSlice = createSlice({
 		})
 });
 
-const {reducer: movieReducer, actions: {setCurrentGenre, setCurrentQuery, setCurrentMovie}} = movieSlice;
+const {reducer: movieReducer, actions: {setCurrentMovie}} = movieSlice;
 
 const movieActions = {
 	getAll,
 	filterByGenre,
 	searchMovie,
 	getMovieById,
-	setCurrentGenre,
-	setCurrentQuery,
 	setCurrentMovie
 };
 

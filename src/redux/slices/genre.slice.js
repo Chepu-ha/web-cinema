@@ -39,7 +39,6 @@ const genreSlice = createSlice({
 		})
 });
 
-// eslint-disable-next-line no-empty-pattern
 const {reducer: genreReducer, actions} = genreSlice;
 
 const genreActions = {
