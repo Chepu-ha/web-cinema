@@ -8,7 +8,7 @@ import paginationStyle from "./Pagination.module.css";
 
 export function Pagination() {
 	const params = useParams();
-	const {page, genre} = params;
+	const {page, genre, search} = params;
 	const navigate = useNavigate();
 	const dispatch = useDispatch();
 
@@ -44,59 +44,31 @@ export function Pagination() {
 	}, []);
 
 	const nextPage = () => {
-		if (page && genre) {
+		if (page && genre && genre !== "searchMode") {
 			navigate(`/moviesListPage/${currentPage + 1}/${genre}`);
+		} else if (page && genre && genre === "searchMode" && search) {
+			navigate(`/moviesListPage/${currentPage + 1}/${genre}/${search}`);
 		} else {
 			navigate(`/moviesListPage/${currentPage + 1}`);
 		}
-
-		// if (currentGenre.id) {
-		// 	setQuery(value => ({page: +value.get("page") + 1, with_genres: currentGenre.name}));
-		// 	dispatch(movieActions.filterByGenre({page: +query.get("page") + 1, currentGenreId: currentGenre.id}));
-		//
-		// 	console.log(`movie?page=${+query.get("page") + 1}&with_genres=${currentGenre.name}`, "nextPageGenre");
-		// } else if (currentQuery) {
-		// 	setQuery(value => ({page: +value.get("page") + 1, query: currentQuery}));
-		// 	dispatch(movieActions.searchMovie({page: +query.get("page") + 1, query: currentQuery}));
-		//
-		// 	console.log(`movie?page=${+query.get("page") + 1}&query=${currentQuery}`, "nextPageQuery");
-		// } else {
-		// 	setQuery(value => ({page: +value.get("page") + 1}));
-		// 	dispatch(movieActions.getAll(+query.get("page") + 1));
-		//
-		// 	console.log(`movie?page=${+query.get("page") + 1}`, "nextPage");
-		// }
 	};
 
 	const prevPage = () => {
-		if (page && genre) {
+		if (page && genre && genre !== "searchMode") {
 			navigate(`/moviesListPage/${currentPage - 1}/${genre}`);
+		} else if (page && genre && genre === "searchMode" && search) {
+			navigate(`/moviesListPage/${currentPage - 1}/${genre}/${search}`);
 		} else {
 			navigate(`/moviesListPage/${currentPage - 1}`);
 		}
-
-		// if (currentGenre.id) {
-		// 	setQuery(value => ({page: value.get("page") - 1, with_genres: currentGenre.name}));
-		// 	dispatch(movieActions.filterByGenre({page: query.get("page") - 1, currentGenreId: currentGenre.id}));
-		//
-		// 	console.log(`movie?page=${query.get("page")}&with_genres=${currentGenre.name}`, "prevPageGenre");
-		// } else if (currentQuery) {
-		// 	setQuery(value => ({page: value.get("page") - 1, query: currentQuery}));
-		// 	dispatch(movieActions.searchMovie({page: query.get("page") - 1, query: currentQuery}));
-		//
-		// 	console.log(`movie?page=${query.get("page") - 1}&query=${currentQuery}`, "prevPageQuery");
-		// } else {
-		// 	setQuery(value => ({page: value.get("page") - 1}));
-		// 	dispatch(movieActions.getAll(query.get("page") - 1));
-		//
-		// 	console.log(`movie?page=${query.get("page") - 1}`, "prevPage");
-		// }
 	};
 
 
 	const selectPage = (selectedPage) => {
-		if (page && genre) {
+		if (page && genre && genre !== "searchMode") {
 			navigate(`/moviesListPage/${selectedPage}/${genre}`);
+		} else if (page && genre && genre === "searchMode" && search) {
+			navigate(`/moviesListPage/${selectedPage}/${genre}/${search}`);
 		} else {
 			navigate(`/moviesListPage/${selectedPage}`);
 		}

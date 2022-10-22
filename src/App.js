@@ -1,20 +1,27 @@
 import "./App.css";
 import {Navigate, Route, Routes} from "react-router-dom";
+import {createContext, useState} from "react";
 
 import {MainLayout} from "./layouts";
 import {MovieDetailsPage, MoviesListPage} from "./pages";
-import {createContext, useState} from "react";
 import {MoviesList} from "./components";
 
 export const ThemeContext = createContext(null);
 
-
 function App() {
-	const [theme, setTheme] = useState("light");
+	const localTheme = localStorage.getItem("theme");
+	const [theme, setTheme] = useState(localTheme);
 
 	const toggleTheme = () => {
-		setTheme((prevTheme) => (prevTheme === "light" ? "dark" : "light"));
+		if (theme === "light") {
+			setTheme("dark");
+			localStorage.setItem("theme", "dark");
+		} else {
+			setTheme("light");
+			localStorage.setItem("theme", "light");
+		}
 	};
+
 	return (
 		<ThemeContext.Provider value={{theme, toggleTheme}}>
 			<div id={theme}>
@@ -27,8 +34,6 @@ function App() {
 							<Route path={":page/:genre/:search"} element={<MoviesList/>}/>
 							<Route path={":page/:genre"} element={<MoviesList/>}/>
 						</Route>
-						{/*<Route path={"moviesListPage/:page/:search"} element={<MoviesListPage/>}/>*/}
-						{/*<Route path={"moviesListPage/:page/:genre"} element={<MoviesListPage/>}/>*/}
 						<Route path={"movieDetailsPage/:id"} element={<MovieDetailsPage/>}/>
 					</Route>
 				</Routes>

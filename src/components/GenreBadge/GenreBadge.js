@@ -4,13 +4,18 @@ import {useEffect, useState} from "react";
 import BadgeStyle from "./BageStyle.module.css";
 
 export function GenreBadge({movie}) {
-	const {genres} = useSelector(state => state.genreReducer);
 	const {genre_ids: movieGenresIds} = movie;
+	const {genres} = useSelector(state => state.genreReducer);
 	const [currentGenres, setCurrentGenres] = useState([]);
+	const currentGenre = localStorage.getItem("genreName");
 
 	useEffect(() => {
-		setCurrentGenres(genres.filter(genre => movieGenresIds.indexOf(genre.id) !== -1));
-	}, [genres, movieGenresIds]);
+		if (currentGenre) {
+			setCurrentGenres(genres.filter(genre => movieGenresIds.indexOf(genre.id) !== -1 && genre.name === currentGenre));
+		} else {
+			setCurrentGenres(genres.filter(genre => movieGenresIds.indexOf(genre.id) !== -1));
+		}
+	}, [currentGenre, genres, movieGenresIds]);
 
 	return (
 		<div className={BadgeStyle.Badge}>

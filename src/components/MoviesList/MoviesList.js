@@ -1,6 +1,6 @@
 import {useDispatch, useSelector} from "react-redux";
 import {useEffect} from "react";
-import {useParams, useSearchParams} from "react-router-dom";
+import {useParams} from "react-router-dom";
 
 import {MoviesListCard} from "../MoviesListCard/MoviesListCard";
 import {movieActions} from "../../redux";
@@ -9,28 +9,27 @@ import CardsStyle from "./MovieList.module.css";
 
 export function MoviesList() {
 	const {movies, loading, error} = useSelector(state => state.movieReducer);
-	const [query, setQuery] = useSearchParams({page: "1"});
 	const dispatch = useDispatch();
-
-	const {currentQuery} = useSelector(state => state.movieReducer);
 
 	const params = useParams();
 	const {page, genre, search} = params;
 
+	useEffect(() => {
+		localStorage.setItem("genreId", "");
+		localStorage.setItem("genreName", "");
+	}, []);
 
 	useEffect(() => {
 		dispatch(movieActions.setCurrentMovie({}));
 		const genreId = localStorage.getItem("genreId");
-		if (page && genre !== "searchMode") {
-			dispatch(movieActions.filterByGenre({page, currentGenreId: genreId.toString()}));
+		if (page && genre && genre !== "searchMode") {
+			dispatch(movieActions.filterByGenre({page, currentGenreId: genreId}));
 		} else if (search) {
 			dispatch(movieActions.searchMovie({page, query: search}));
 		} else {
 			dispatch(movieActions.getAll(page));
 		}
-
-		console.log(`movie?page=${query.get("page")}`, "MovieList1");
-	}, [page, genre, query, dispatch, params.page, search]);
+	}, [page, genre, dispatch, params.page, search]);
 
 	return (
 		<div className={CardsStyle.Cards}>

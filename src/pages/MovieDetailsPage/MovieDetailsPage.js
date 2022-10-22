@@ -1,15 +1,14 @@
-import {Link, useLocation, useParams} from "react-router-dom";
+import {Link, useParams} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
 import {useEffect} from "react";
 
-import {movieActions} from "../../redux";
 import {postersURL} from "../../configs";
+import {movieActions} from "../../redux";
 
 export function MovieDetailsPage() {
 	const dispatch = useDispatch();
 	const {id} = useParams();
 	const pathname = localStorage.getItem("pathname");
-
 
 	useEffect(() => {
 		dispatch(movieActions.getMovieById(id));
@@ -31,7 +30,6 @@ export function MovieDetailsPage() {
 		overview,
 		runtime,
 	} = currentMovie;
-
 
 	return (
 		<div>
