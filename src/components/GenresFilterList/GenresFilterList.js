@@ -4,8 +4,6 @@ import {useEffect} from "react";
 import {genreActions} from "../../redux";
 import {GenreFilter} from "../GenreFilter/GenreFilter";
 
-import GenresStyle from "./GenresFilter.module.css";
-
 export function GenresFilterList() {
 	const dispatch = useDispatch();
 	const {genres, loading, error} = useSelector(state => state.genreReducer);
@@ -15,7 +13,7 @@ export function GenresFilterList() {
 	}, [dispatch]);
 
 	return (
-		<div className={GenresStyle.Filters}>
+		<div className="filters">
 			{loading && <h1>Loading...</h1>}
 			{error && <h1>Error</h1>}
 			{genres.map((genre) => <GenreFilter key={genre.id} genre={genre}/>)}

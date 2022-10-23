@@ -1,10 +1,11 @@
-import "./App.css";
+import "./App.scss";
 import {Navigate, Route, Routes} from "react-router-dom";
 import {createContext, useState} from "react";
 
 import {MainLayout} from "./layouts";
 import {MovieDetailsPage, MoviesListPage} from "./pages";
 import {MoviesList} from "./components";
+
 
 export const ThemeContext = createContext(null);
 

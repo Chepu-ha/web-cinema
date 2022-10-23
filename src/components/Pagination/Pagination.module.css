@@ -1,9 +1,0 @@
-.Pagination {
-    display: flex;
-    justify-content: center;
-}
-
-.Active {
-    background-color: red;
-    color: #fff;
-}

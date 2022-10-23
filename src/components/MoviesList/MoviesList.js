@@ -5,8 +5,6 @@ import {useParams} from "react-router-dom";
 import {MoviesListCard} from "../MoviesListCard/MoviesListCard";
 import {movieActions} from "../../redux";
 
-import CardsStyle from "./MovieList.module.css";
-
 export function MoviesList() {
 	const {movies, loading, error} = useSelector(state => state.movieReducer);
 	const dispatch = useDispatch();
@@ -32,7 +30,7 @@ export function MoviesList() {
 	}, [page, genre, dispatch, params.page, search]);
 
 	return (
-		<div className={CardsStyle.Cards}>
+		<div className="cards">
 			{loading && <h1>Loading...</h1>}
 			{error && <h1>Error</h1>}
 			{movies.map((movie) => <MoviesListCard key={movie.id} movie={movie}/>)}

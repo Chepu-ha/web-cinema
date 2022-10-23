@@ -1,8 +1,6 @@
 import {useNavigate, useParams} from "react-router-dom";
 import {useEffect, useState} from "react";
 
-import paginationStyle from "./Pagination.module.css";
-
 export function Pagination() {
 	const params = useParams();
 	const {page, genre, search} = params;
@@ -64,24 +62,30 @@ export function Pagination() {
 	};
 
 	return (
-		<div className={paginationStyle.Pagination}>
-			<button disabled={+currentPage === 1} onClick={() => prevPage()}>Prev</button>
-			<button hidden={floorCurrentPage === 0} onClick={() => selectPage(allPages[0].toString())}>1...</button>
+		<div className="pagination">
+			<div>
+				<button disabled={+currentPage === 1} onClick={() => prevPage()}>Prev</button>
+				<button hidden={floorCurrentPage === 0} onClick={() => selectPage(allPages[0].toString())}>1...</button>
+			</div>
 
-			{allPages.map((page, index) => page > floorCurrentPage && page <= ceilCurrentPage &&
-				<button
-					className={currentPage === page ? paginationStyle.Active : null}
-					disabled={currentPage === page}
-					onClick={() => selectPage(page.toString())}
-					key={index}
-				>
-					{page}
+			<div className="numbers">
+				{allPages.map((page, index) => page > floorCurrentPage && page <= ceilCurrentPage &&
+					<button
+						className={currentPage === page ? "active" : null}
+						disabled={currentPage === page}
+						onClick={() => selectPage(page.toString())}
+						key={index}
+					>
+						{page}
+					</button>
+				)}
+			</div>
+
+			<div>
+				<button hidden={floorCurrentPage === 490} onClick={() => selectPage(allPages.length.toString())}>...500
 				</button>
-			)}
-
-			<button hidden={floorCurrentPage === 490} onClick={() => selectPage(allPages.length.toString())}>...500
-			</button>
-			<button disabled={+currentPage === allPages.length} onClick={() => nextPage()}>Next</button>
+				<button disabled={+currentPage === allPages.length} onClick={() => nextPage()}>Next</button>
+			</div>
 		</div>
 	);
 }

@@ -12,12 +12,12 @@ export function Search() {
 	};
 
 	return (
-		<form onSubmit={handleSubmit(search)}>
-			<input type="text"
+		<form className="search-form" onSubmit={handleSubmit(search)}>
+			<input className="search-input" type="text"
 					 placeholder={"Enter title"}
 					 {...register("searchInput", {required: true, minLength: {value: 1}})}
 			/>
-			<button disabled={!isValid}>Submit</button>
+			<button className="search-button" disabled={!isValid}>Submit</button>
 		</form>
 	);
 }

@@ -1,8 +1,6 @@
 import {useSelector} from "react-redux";
 import {useEffect, useState} from "react";
 
-import BadgeStyle from "./BageStyle.module.css";
-
 export function GenreBadge({movie}) {
 	const {genre_ids: movieGenresIds} = movie;
 	const {genres} = useSelector(state => state.genreReducer);
@@ -18,8 +16,8 @@ export function GenreBadge({movie}) {
 	}, [currentGenre, genres, movieGenresIds]);
 
 	return (
-		<div className={BadgeStyle.Badge}>
-			{currentGenres.map((genre) => <div key={genre.id}>{genre.name}</div>)}
+		<div className={"badges"}>
+			{currentGenres.map((genre) => <div className="badge" key={genre.id}>{genre.name}</div>)}
 		</div>
 	);
 }

@@ -1,23 +1,21 @@
-import {Link, useLocation} from "react-router-dom";
+import {Link, useLocation, useNavigate} from "react-router-dom";
 
 import {PosterPreview} from "../PostserPreview/PosterPreview";
 import {MovieInfo} from "../MovieInfo/MovieInfo";
 import {StarsRating} from "../StarsRating/StarsRating";
 import {GenreBadge} from "../GenreBadge/GenreBadge";
 
-import CardStyle from "./MovieCard.module.css";
-
 export function MoviesListCard({movie}) {
-	const {pathname}= useLocation();
-	localStorage.setItem("pathname", pathname)
+	const {pathname} = useLocation();
+	localStorage.setItem("pathname", pathname);
 
 	return (
-		<div className={CardStyle.Card}>
+		<div className="card">
 			<GenreBadge movie={movie}/>
-			<Link to={`/movieDetailsPage/${movie.id}`}>
+			<div>
 				<PosterPreview movie={movie}/>
 				<MovieInfo movie={movie}/>
-			</Link>
+			</div>
 			<StarsRating rating={movie.vote_average}/>
 		</div>
 	);

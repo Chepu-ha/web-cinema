@@ -1,8 +1,6 @@
 import {useNavigate, useParams} from "react-router-dom";
 import {useEffect, useState} from "react";
 
-import GenreStyle from "./GenreFilter.module.css";
-
 export function GenreFilter({genre}) {
 	const {id: genreId, name} = genre;
 	const {genre: paramsGenre} = useParams();
@@ -29,7 +27,7 @@ export function GenreFilter({genre}) {
 
 	return (
 		<button  onClick={() => genreFilter()}
-				  className={isActive ? GenreStyle.FilterCurrent : GenreStyle.Filter}
+				  className={isActive ? "filter-current" : "filter"}
 		>
 			{name}
 		</button>

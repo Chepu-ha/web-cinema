@@ -1,10 +1,8 @@
 import {Rating} from "react-simple-star-rating";
 
-import StarsStyle from "./StarsStyle.module.css";
-
 export function StarsRating({rating}) {
 	return (
-		<div className={StarsStyle.Stars}>
+		<div className="rating">
 			<Rating
 				initialValue={rating}
 				iconsCount={10}

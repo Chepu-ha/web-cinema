@@ -1,0 +1,348 @@
+//Colors:
+//light:
+$white: #ffffff;
+$Lbg: #ffffff;
+$Lgrey: #8F95A5;
+$Dgrey: #263238;
+
+//dark:
+$black: #000000;
+$Dbg: #28211B;
+
+#light {
+  transition: all 0.3s ease 0s;
+  background-color: $white;
+  color: $black;
+
+  .header {
+    background-color: $white;
+    border-bottom: 2px solid $black;
+
+    .moon {
+      cursor: pointer;
+
+    }
+  }
+
+  .filter {
+    border: 1px solid $black;
+    color: $black;
+    background-color: $white;
+
+    &:hover {
+      background-color: $black;
+      color: $white;
+    }
+  }
+
+  .filter-current {
+    border: 1px solid $black;
+    background-color: $black;
+    color: $white;
+
+    &:hover {
+      background-color: $white;
+      color: $black;
+    }
+  }
+
+  .search-button {
+    background-color: $white;
+    border: 1px solid $black;
+
+    &:disabled {
+      cursor: initial;
+      background-color: $white;
+      border: 1px solid $black;
+      color: $black;
+    }
+
+    &:enabled {
+      transform: scale(1.05);
+    }
+
+    &:enabled:hover {
+      background-color: $black;
+      border: 1px solid $white;
+      color: $white;
+    }
+  }
+
+  .card {
+    border: 2px solid $black;
+
+
+    .badges {
+      .badge {
+        background-color: $white;
+        color: $black;
+        border: 1px solid $black;
+      }
+    }
+  }
+
+  .pagination {
+    .active {
+      border: 1px solid $white;
+      background-color: $black;
+      color: $white;
+    }
+    button {
+      border: 1px solid $black;
+      background-color: $white;
+      color: $black;
+      &:enabled:hover {
+        border: 1px solid $white;
+        background-color: $black;
+        color: $white;
+      }
+    }
+  }
+}
+
+#dark {
+  transition: all 0.3s ease 0s;
+  background-color: $black;
+  color: $white;
+
+  .header {
+    border-bottom: 2px solid $white;
+
+    .sun {
+      cursor: pointer;
+    }
+  }
+
+  .filter {
+    border: 1px solid $white;
+    background-color: $black;
+    color: $white;
+
+    &:hover {
+      background-color: $white;
+      color: $black;
+    }
+  }
+
+  .filter-current {
+    border: 1px solid $white;
+    background-color: $white;
+    color: $black;
+
+    &:hover {
+      background-color: $black;
+      color: $white;
+    }
+  }
+
+  .search-button {
+    background-color: $black;
+    border: 1px solid $white;
+    color: $white;
+
+    &:disabled {
+      cursor: initial;
+      background-color: $black;
+      border: 1px solid $white;
+      color: $white;
+    }
+
+    &:enabled {
+      transform: scale(1.05);
+    }
+
+    &:enabled:hover {
+      background-color: $white;
+      border: 1px solid $black;
+      color: $black;
+    }
+  }
+
+  .card {
+    border: 2px solid $white;
+
+    .badges {
+      .badge {
+        background-color: $black;
+        color: $white;
+        border: 1px solid $white;
+      }
+    }
+  }
+
+  .pagination {
+    .active {
+      border: 1px solid $black;
+      background-color: $white;
+      color: $black;
+    }
+    button {
+      border: 1px solid $white;
+      background-color: $black;
+      color: $white;
+      &:enabled:hover {
+        border: 1px solid $black;
+        background-color: $white;
+        color: $black;
+      }
+    }
+  }
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+}
+
+.filters {
+  display: flex;
+  column-gap: 10px;
+  align-items: center;
+  padding: 5px;
+}
+
+.filter {
+  transition: all 0.2s ease 0s;
+  font-size: 16px;
+  font-weight: 700;
+  flex: 1 1 200px;
+  padding: 5px;
+  border-radius: 40px;
+  text-align: center;
+
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+.filter-current {
+  transition: all 0.2s ease 0s;
+  font-size: 16px;
+  font-weight: 700;
+  flex: 1 1 200px;
+  padding: 5px;
+  border-radius: 40px;
+  text-align: center;
+
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+.search-form {
+  display: flex;
+  column-gap: 5px;
+  justify-content: flex-end;
+  height: 30px;
+  padding: 10px;
+
+  .search-input {
+    font-size: 16px;
+    font-weight: 700;
+    width: 300px;
+    padding: 5px 5px 5px 10px;
+    border-radius: 20px;
+  }
+
+  .search-button {
+    transition: all 0.3s ease 0s;
+    font-size: 16px;
+    width: 100px;
+    cursor: pointer;
+    border-radius: 20px;
+  }
+}
+
+.cards {
+  padding: 10px;
+  display: grid;
+  justify-items: center;
+  grid-template-columns: repeat(3, 1fr);
+  row-gap: 40px;
+
+  .card {
+    border-radius: 30px;
+    display: grid;
+    align-content: space-between;
+    flex-direction: column;
+    width: 500px;
+    border: 1px solid green;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s ease 0s;
+
+    &:hover {
+      transform: scale(1.05);
+    }
+
+    .badges {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      row-gap: 5px;
+      justify-content: center;
+
+      .badge {
+        transition: all 0.3s ease 0s;
+        font-weight: 650;
+        padding: 5px 10px;
+        border-radius: 20px;
+      }
+    }
+
+    .poster {
+      cursor: pointer;
+
+      & img {
+      }
+    }
+
+    .info {
+      padding: 10px;
+      display: flex;
+      flex-direction: column;
+      row-gap: 10px;
+
+      a {
+        color: inherit;
+        text-decoration: none;
+
+        &:hover {
+          text-decoration: underline;
+        }
+      }
+    }
+
+    .rating {
+      padding: 10px;
+    }
+  }
+}
+
+.pagination {
+  & > * {
+    display: flex;
+    column-gap: 10px;
+  }
+  padding: 50px;
+  display: flex;
+  justify-content: center;
+  column-gap: 15px;
+
+  button {
+    &:disabled {
+      cursor: inherit;
+    }
+    transition: all 0.3s ease 0s;
+    border-radius: 10px;
+    padding: 10px 20px;
+    font-size: 18px;
+    font-weight: 600;
+    cursor: pointer;
+  }
+}
