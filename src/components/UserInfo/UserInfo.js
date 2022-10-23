@@ -1,7 +1,9 @@
+import {FaUserAlt} from "react-icons/fa";
+
 export function UserInfo() {
 	return (
 		<div className="user">
-			<div className="circle"></div>
+			<FaUserAlt className="avatar" size="30px"/>
 			<div className="name">John Smit</div>
 		</div>
 	);
