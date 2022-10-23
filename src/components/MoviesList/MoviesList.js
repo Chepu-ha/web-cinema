@@ -12,11 +12,6 @@ export function MoviesList() {
 	const params = useParams();
 	const {page, genre, search} = params;
 
-	// useEffect(() => {
-	// 	localStorage.setItem("genreId", "");
-	// 	localStorage.setItem("genreName", "");
-	// }, []);
-
 	useEffect(() => {
 		dispatch(movieActions.setCurrentMovie({}));
 		const genreId = localStorage.getItem("genreId");
