@@ -1,10 +1,8 @@
-import UserStyle from "./UserInfo.module.css";
-
 export function UserInfo() {
 	return (
-		<div className={UserStyle.User}>
-			<div className={UserStyle.Circle}></div>
-			<div className={UserStyle.Name}>John Smit</div>
+		<div className="user">
+			<div className="circle"></div>
+			<div className="name">John Smit</div>
 		</div>
 	);
 }

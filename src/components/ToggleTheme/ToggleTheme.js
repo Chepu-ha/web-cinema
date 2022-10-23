@@ -6,7 +6,7 @@ import {FaMoon} from "react-icons/fa";
 export function ToggleTheme() {
 
 	return (
-		<div>
+		<div className="weather">
 			<ThemeContext.Consumer>
 				{(value) => (
 					value.theme === "dark" ?

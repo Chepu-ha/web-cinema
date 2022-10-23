@@ -4,11 +4,13 @@ import {useForm} from "react-hook-form";
 export function Search() {
 	const navigate = useNavigate();
 
-	const {register, handleSubmit, formState: {isValid}} = useForm({mode: "all"});
+	const {register, handleSubmit, reset, formState: {isValid}} = useForm({mode: "all"});
 
-	const search = (data) => {
-		const {searchInput} = data;
-		navigate(`1/searchMode/${searchInput}`)
+	const search = ({searchInput}) => {
+		localStorage.setItem("genreId", "");
+		localStorage.setItem("genreName", "");
+		navigate(`1/searchMode/${searchInput}`);
+		reset();
 	};
 
 	return (

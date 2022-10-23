@@ -38,6 +38,7 @@ export function Pagination() {
 		} else {
 			navigate(`/moviesListPage/${currentPage + 1}`);
 		}
+		window.scrollTo(0, 0);
 	};
 
 	const prevPage = () => {
@@ -48,6 +49,7 @@ export function Pagination() {
 		} else {
 			navigate(`/moviesListPage/${currentPage - 1}`);
 		}
+		window.scrollTo(0, 0);
 	};
 
 
@@ -59,6 +61,7 @@ export function Pagination() {
 		} else {
 			navigate(`/moviesListPage/${selectedPage}`);
 		}
+		window.scrollTo(0, 0);
 	};
 
 	return (

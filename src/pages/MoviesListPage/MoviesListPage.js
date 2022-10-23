@@ -4,7 +4,7 @@ import {GenresFilterList, Pagination, Search} from "../../components";
 
 export function MoviesListPage() {
 	return (
-		<div>
+		<div className="moviesListPage">
 			<GenresFilterList/>
 			<Search/>
 			<Outlet/>

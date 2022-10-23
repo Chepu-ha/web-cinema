@@ -4,8 +4,8 @@ import {useEffect, useState} from "react";
 export function GenreFilter({genre}) {
 	const {id: genreId, name} = genre;
 	const {genre: paramsGenre} = useParams();
-	const navigate = useNavigate();
 	const [isActive, setIsActive] = useState(false);
+	const navigate = useNavigate();
 
 	useEffect(() => {
 		if (paramsGenre === name) {
@@ -17,7 +17,9 @@ export function GenreFilter({genre}) {
 
 	const genreFilter = () => {
 		if (isActive) {
-			navigate(`/moviesListPage`);
+			localStorage.setItem("genreId", "");
+			localStorage.setItem("genreName", "");
+			navigate(`/moviesListPage/1`);
 		} else {
 			localStorage.setItem("genreId", `${genreId}`);
 			localStorage.setItem("genreName", `${name}`);

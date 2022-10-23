@@ -19,6 +19,7 @@ export function MovieDetailsPage() {
 	const {
 		poster_path,
 		title,
+		original_title,
 		tagline,
 		vote_average,
 		budget,
@@ -28,37 +29,55 @@ export function MovieDetailsPage() {
 		original_language,
 		overview,
 		runtime,
+		adult,
+		status
 	} = currentMovie;
 
 	return (
-		<div>
-			<div><Link to={pathname}>List</Link></div>
+		<div className="movieDetailsPage">
+			<Link to={pathname}>Back to list</Link>
 			{!error && title &&
 				<div>
-					<div className={"title"}>
+					<div className="title">
 						<h1>{title}</h1>
 					</div>
-					<div>
-						<div className={"poster"}>
-							{poster_path && <img src={postersURL + poster_path} alt={title}/>}
+					<div className="body">
+						<div className="poster">
+							{poster_path ? <img src={postersURL + poster_path} alt={title}/> : <div></div>}
 						</div>
-						<div className={"info"}>
-							<div className={"rating"}><span>Rating:</span><span>{vote_average}/10</span></div>
-							<div className={"budget"}><span>Budget:</span><span>{budget}$</span></div>
-							<div className={"tagline"}><span>Tagline</span><span>{tagline}</span></div>
-							<div className={"date"}><span>Release date:</span><span>{release_date}</span></div>
-							<div className={"countries"}>
-								<span>Production countries:</span>{production_countries && production_countries.map((country, i) =>
-								<span key={i}>{country.name}</span>)}</div>
-							<div className={"genres"}><span>Genres:</span>{genres && genres.map((genre) => <span
-								key={genre.id}>{genre.name}</span>)}</div>
-							<div className={"language"}><span>Original language:</span><span>{original_language}</span></div>
-							<div className={"time"}><span>Time:</span><span>{runtime}</span></div>
+						<div className="info">
+							<div>Rating:</div>
+							<div>{vote_average}/10</div>
+							<div>Original title:</div>
+							<div>{original_title}</div>
+							<div>Budget:</div>
+							<div>{budget}$</div>
+							<div>Tagline:</div>
+							<div>{tagline}</div>
+							<div>Release date:</div>
+							<div>{release_date}</div>
+							<div>Production countries:</div>
+							<div>
+								{production_countries && production_countries.map((country, i) =>
+									<div key={i}>{country.name}</div>)}
+							</div>
+							<div>Genres:</div>
+							<div>{genres && genres.map((genre) =>
+								<div key={genre.id}>{genre.name}</div>)}
+							</div>
+							<div>Original language:</div>
+							<div>{original_language}</div>
+							<div>Time:</div>
+							<div>{runtime} min</div>
+							<div>Adult:</div>
+							<div>{adult ? "Yes" : "No"}</div>
+							<div>Status:</div>
+							<div>{status}</div>
 						</div>
-					</div>
-					<div>
-						<h2>Overview</h2>
-						<div>{overview}</div>
+						<div className="overview">
+							<h2>Overview</h2>
+							<div>{overview}</div>
+						</div>
 					</div>
 				</div>
 			}

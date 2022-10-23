@@ -6,7 +6,6 @@ import {MainLayout} from "./layouts";
 import {MovieDetailsPage, MoviesListPage} from "./pages";
 import {MoviesList} from "./components";
 
-
 export const ThemeContext = createContext(null);
 
 function App() {

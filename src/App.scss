@@ -1,13 +1,13 @@
 //Colors:
 //light:
 $white: #ffffff;
-$Lbg: #ffffff;
-$Lgrey: #8F95A5;
-$Dgrey: #263238;
+//$Lbg: #ffffff;
+//$Lgrey: #8F95A5;
+//$Dgrey: #263238;
 
 //dark:
 $black: #000000;
-$Dbg: #28211B;
+//$Dbg: #28211B;
 
 #light {
   transition: all 0.3s ease 0s;
@@ -25,7 +25,6 @@ $Dbg: #28211B;
   }
 
   .filter {
-    border: 1px solid $black;
     color: $black;
     background-color: $white;
 
@@ -69,9 +68,6 @@ $Dbg: #28211B;
   }
 
   .card {
-    border: 2px solid $black;
-
-
     .badges {
       .badge {
         background-color: $white;
@@ -87,10 +83,12 @@ $Dbg: #28211B;
       background-color: $black;
       color: $white;
     }
+
     button {
       border: 1px solid $black;
       background-color: $white;
       color: $black;
+
       &:enabled:hover {
         border: 1px solid $white;
         background-color: $black;
@@ -102,11 +100,13 @@ $Dbg: #28211B;
 
 #dark {
   transition: all 0.3s ease 0s;
+  min-height: 100vh;
   background-color: $black;
   color: $white;
 
   .header {
     border-bottom: 2px solid $white;
+    background-color: $black;
 
     .sun {
       cursor: pointer;
@@ -176,10 +176,12 @@ $Dbg: #28211B;
       background-color: $white;
       color: $black;
     }
+
     button {
       border: 1px solid $white;
       background-color: $black;
       color: $white;
+
       &:enabled:hover {
         border: 1px solid $black;
         background-color: $white;
@@ -189,21 +191,100 @@ $Dbg: #28211B;
   }
 }
 
-.header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 10px;
+.mainLayout {
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+
+    .weather {
+
+    }
+  }
+
+  .user {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    .circle {
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      background-color: $white;
+    }
+
+    .name {
+
+    }
+  }
+
+  .moviesListPage {
+    padding: 10px;
+  }
+
+  .movieDetailsPage {
+    a {
+      color: inherit;
+      font-size: 20px;
+
+      &:hover {
+        color: red;
+      }
+    }
+
+    padding: 10px;
+
+    .title {
+
+    }
+
+    .body {
+      display: flex;
+      column-gap: 20px;
+
+      .poster {
+        img {
+
+        }
+      }
+
+      .info {
+        > div:nth-child(2n+1) {
+          font-weight: 700;
+        }
+
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+        align-content: start;
+      }
+
+      .overview {
+        h2 {
+          margin: 0 0 20px 0;
+        }
+      }
+    }
+  }
 }
+
 
 .filters {
   display: flex;
   column-gap: 10px;
   align-items: center;
   padding: 5px;
+  @media (max-width: 1870px) {
+    flex-wrap: wrap;
+    row-gap: 10px;
+  }
 }
 
 .filter {
+  border: 1px solid $black;
+  user-select: none;
   transition: all 0.2s ease 0s;
   font-size: 16px;
   font-weight: 700;
@@ -256,22 +337,38 @@ $Dbg: #28211B;
 }
 
 .cards {
+  h1 {
+    display: flex;
+    justify-content: center;
+  }
+
+  min-height: 100vh;
   padding: 10px;
   display: grid;
   justify-items: center;
   grid-template-columns: repeat(3, 1fr);
   row-gap: 40px;
+  @media (max-width: 1620px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  @media (max-width: 1200px) {
+    grid-template-columns: repeat(1, 1fr);
+  }
 
   .card {
+    border: 2px solid $black;
     border-radius: 30px;
     display: grid;
     align-content: space-between;
     flex-direction: column;
     width: 500px;
-    border: 1px solid green;
     position: relative;
     overflow: hidden;
     transition: all 0.3s ease 0s;
+
+    @media (max-width: 650px) {
+      width: auto;
+    }
 
     &:hover {
       transform: scale(1.05);
@@ -288,6 +385,7 @@ $Dbg: #28211B;
       justify-content: center;
 
       .badge {
+        z-index: 10;
         transition: all 0.3s ease 0s;
         font-weight: 650;
         padding: 5px 10px;
@@ -297,9 +395,26 @@ $Dbg: #28211B;
 
     .poster {
       cursor: pointer;
+      height: 750px;
+      position: relative;
 
       & img {
+        position: absolute;
+        height: 100%;
+        width: 100%;
+        top: 0;
+        left: 0;
+        object-fit: cover;
       }
+    }
+
+    .poster-error {
+      background-color: grey;
+      height: 750px;
+    }
+
+    .poster-loading {
+      height: 750px;
     }
 
     .info {
@@ -329,20 +444,37 @@ $Dbg: #28211B;
     display: flex;
     column-gap: 10px;
   }
+
   padding: 50px;
   display: flex;
   justify-content: center;
   column-gap: 15px;
+  @media (max-width: 1200px) {
+    flex-wrap: wrap;
+    row-gap: 10px;
+  }
+
+  .numbers {
+    @media (max-width: 1200px) {
+      flex-wrap: wrap;
+      justify-content: center;
+      row-gap: 10px;
+    }
+  }
 
   button {
     &:disabled {
       cursor: inherit;
     }
+
     transition: all 0.3s ease 0s;
     border-radius: 10px;
     padding: 10px 20px;
     font-size: 18px;
     font-weight: 600;
     cursor: pointer;
+    @media (max-width: 1200px) {
+      padding: 5px 10px;
+    }
   }
 }

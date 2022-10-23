@@ -12,10 +12,10 @@ export function MoviesList() {
 	const params = useParams();
 	const {page, genre, search} = params;
 
-	useEffect(() => {
-		localStorage.setItem("genreId", "");
-		localStorage.setItem("genreName", "");
-	}, []);
+	// useEffect(() => {
+	// 	localStorage.setItem("genreId", "");
+	// 	localStorage.setItem("genreName", "");
+	// }, []);
 
 	useEffect(() => {
 		dispatch(movieActions.setCurrentMovie({}));
@@ -33,7 +33,7 @@ export function MoviesList() {
 		<div className="cards">
 			{loading && <h1>Loading...</h1>}
 			{error && <h1>Error</h1>}
-			{movies.map((movie) => <MoviesListCard key={movie.id} movie={movie}/>)}
+			{!loading && movies.map((movie) => <MoviesListCard key={movie.id} movie={movie}/>)}
 		</div>
 	);
 }
