@@ -1,6 +1,7 @@
 const baseURL = "https://api.themoviedb.org/3";
 const postersURL = "https://image.tmdb.org/t/p/w500";
 const accessToken = "eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI5ZjkxNjJjN2FlYmM1ZTFhYWE3MTRlZWUxNTgyZTMwMCIsInN1YiI6IjYzNGFkYjNhNTAxY2YyMDA3YTFmMDY2MyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.6agJMV68v8P_WnGGZFcTnybSxBqKM2RaHUOZHEE_51g";
+const maxPages = 500;
 
 const urls = {
 	movies: "/discover/movie",
@@ -10,4 +11,4 @@ const urls = {
 	movie: "/movie/"
 };
 
-export {baseURL, postersURL, accessToken, urls};
+export {baseURL, postersURL, accessToken, maxPages, urls};

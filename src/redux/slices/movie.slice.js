@@ -5,7 +5,6 @@ import {movieService} from "../../services";
 const initialState = {
 	movies: [],
 	currentMovie: {},
-	posters: [],
 	loading: false,
 	error: null
 };
@@ -62,9 +61,6 @@ const movieSlice = createSlice({
 	name: "movieSlice",
 	initialState,
 	reducers: {
-		setCurrentQuery: (state, action) => {
-			state.currentQuery = action.payload;
-		},
 		setCurrentMovie: (state, action) => {
 			state.currentMovie = action.payload;
 		}

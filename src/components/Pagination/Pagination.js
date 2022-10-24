@@ -1,6 +1,8 @@
 import {useNavigate, useParams} from "react-router-dom";
 import {useEffect, useState} from "react";
 
+import {maxPages} from "../../configs";
+
 export function Pagination() {
 	const params = useParams();
 	const {page, genre, search} = params;
@@ -25,7 +27,7 @@ export function Pagination() {
 
 	useEffect(() => {
 		//API can give only 500 pages
-		for (let i = 1; i <= 500; i++) {
+		for (let i = 1; i <= maxPages; i++) {
 			setAllPages((allPages) => [...allPages, i]);
 		}
 	}, []);
@@ -70,7 +72,6 @@ export function Pagination() {
 				<button disabled={+currentPage === 1} onClick={() => prevPage()}>Prev</button>
 				<button hidden={floorCurrentPage === 0} onClick={() => selectPage(allPages[0].toString())}>1...</button>
 			</div>
-
 			<div className="numbers">
 				{allPages.map((page, index) => page > floorCurrentPage && page <= ceilCurrentPage &&
 					<button
@@ -83,7 +84,6 @@ export function Pagination() {
 					</button>
 				)}
 			</div>
-
 			<div>
 				<button hidden={floorCurrentPage === 490} onClick={() => selectPage(allPages.length.toString())}>...500
 				</button>

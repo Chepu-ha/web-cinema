@@ -1,10 +1,11 @@
-import "./App.scss";
 import {Navigate, Route, Routes} from "react-router-dom";
 import {createContext, useState} from "react";
 
 import {MainLayout} from "./layouts";
 import {MovieDetailsPage, MoviesListPage} from "./pages";
 import {MoviesList} from "./components";
+
+import "./style/main.scss";
 
 export const ThemeContext = createContext(null);
 
@@ -24,7 +25,7 @@ function App() {
 
 	return (
 		<ThemeContext.Provider value={{theme, toggleTheme}}>
-			<div id={theme}>
+			<div id={theme ? theme : "light"}>
 				<Routes>
 					<Route path={"/"} element={<MainLayout/>}>
 						<Route index element={<Navigate to={"moviesListPage"}/>}/>

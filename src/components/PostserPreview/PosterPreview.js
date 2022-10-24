@@ -1,11 +1,11 @@
 import {useSelector} from "react-redux";
+import {useNavigate} from "react-router-dom";
 
 import {postersURL} from "../../configs";
-import {useNavigate} from "react-router-dom";
 
 export function PosterPreview({movie}) {
 	const {poster_path: posterPath, title} = movie;
-	const {loading, error} = useSelector(state => state.movieReducer);
+	const {loading} = useSelector(state => state.movieReducer);
 	const navigate = useNavigate();
 
 	const link = () => {

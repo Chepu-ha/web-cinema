@@ -9,8 +9,7 @@ export function MoviesList() {
 	const {movies, loading, error} = useSelector(state => state.movieReducer);
 	const dispatch = useDispatch();
 
-	const params = useParams();
-	const {page, genre, search} = params;
+	const {page, genre, search} = useParams();
 
 	useEffect(() => {
 		dispatch(movieActions.setCurrentMovie({}));
@@ -22,12 +21,12 @@ export function MoviesList() {
 		} else {
 			dispatch(movieActions.getAll(page));
 		}
-	}, [page, genre, dispatch, params.page, search]);
+	}, [page, genre, dispatch, search]);
 
 	return (
 		<div className="cards">
-			{loading && <h1>Loading...</h1>}
-			{error && <h1>Error</h1>}
+			{error && <h1 className="error">Error</h1>}
+			{loading && <div className="loading"><h1>Loading...</h1></div>}
 			{!loading && movies.map((movie) => <MoviesListCard key={movie.id} movie={movie}/>)}
 		</div>
 	);
