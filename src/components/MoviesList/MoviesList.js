@@ -27,7 +27,7 @@ export function MoviesList() {
 		<div className="cards">
 			{error && <h1 className="error">Error</h1>}
 			{loading && <div className="loading"><h1>Loading...</h1></div>}
-			{!loading && movies.map((movie) => <MoviesListCard key={movie.id} movie={movie}/>)}
+			{!loading && !!movies.length ? movies.map((movie) => <MoviesListCard key={movie.id} movie={movie}/>) : <h1>Empty</h1>}
 		</div>
 	);
 }
