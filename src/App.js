@@ -10,7 +10,7 @@ import "./style/main.scss";
 export const ThemeContext = createContext(null);
 
 function App() {
-	const localTheme = localStorage.getItem("theme");
+	const localTheme = localStorage.getItem("theme") ?? "light";
 	const [theme, setTheme] = useState(localTheme);
 
 	const toggleTheme = () => {

@@ -13,7 +13,7 @@ const store = setUpStore();
 
 root.render(
 	<Provider store={store}>
-		<BrowserRouter>
+		<BrowserRouter basename="/Movie-catalog">
 			<App/>
 		</BrowserRouter>
 	</Provider>

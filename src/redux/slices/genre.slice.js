@@ -34,12 +34,12 @@ const genreSlice = createSlice({
 			state.error = action.payload;
 			state.loading = false;
 		})
-		.addCase(getAll.pending, (state, action) => {
+		.addCase(getAll.pending, state => {
 			state.loading = true;
 		})
 });
 
-const {reducer: genreReducer, actions} = genreSlice;
+const {reducer: genreReducer} = genreSlice;
 
 const genreActions = {
 	getAll

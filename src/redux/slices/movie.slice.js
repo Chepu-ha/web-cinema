@@ -76,7 +76,7 @@ const movieSlice = createSlice({
 			state.error = action.payload;
 			state.loading = false;
 		})
-		.addCase(getAll.pending, (state, action) => {
+		.addCase(getAll.pending, state => {
 			state.loading = true;
 		})
 		.addCase(filterByGenre.fulfilled, (state, action) => {

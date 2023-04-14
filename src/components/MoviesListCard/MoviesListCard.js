@@ -1,4 +1,4 @@
-import {Link, useLocation, useNavigate} from "react-router-dom";
+import {useLocation} from "react-router-dom";
 
 import {PosterPreview} from "../PostserPreview/PosterPreview";
 import {MovieInfo} from "../MovieInfo/MovieInfo";
